@@ -1,0 +1,37 @@
+{
+    "nav": {
+        "about": "Mida me teeme",
+        "price": "Hinnad",
+        "contact": "Kontakt"
+    },
+    "hero": {
+        "title_1": "Me tegeleme",
+        "title_2": "olmejäätmete ja",
+        "title_3": "ehitusprahtide veoga",
+        "subtitle": "Professionaalne ja usaldusvaarne jaatmekaitlusteenus Tallinnas ja Harjumaal",
+        "button": "Küsi pakkumist"
+    },
+    "about": {
+        "title": "Meie Teenused",
+        "subtitle_1": "Mida me teeme?",
+        "subtitle_1_text_1": "Olmejäätmevedu",
+        "subtitle_1_text_2": "Ehitusjäätmete vedu",
+        "subtitle_2": "Miks valida meid?",
+        "subtitle_2_text_1": "Ulatuslik töökogemus (turul aastast 2007)",
+        "subtitle_2_text_2": "Suur konteinerite valik (10m³, 12m³, 15m³, 20m³, 30m³)",
+        "subtitle_2_text_3": "Kiire ja paindlik teenus",
+        "subtitle_2_text_4": "Konkurentsivõimelised hinnad",
+        "subtitle_2_text_5": "Individuaalne lähenemine"
+    },
+    "prices": {
+        "title": "Meie Hinnad"
+    },
+
+    "contact": {
+        "title": "Võtke meiega ühendust",
+        "name": "Nimi (kohustuslik)",
+        "email": "E-post (kohustuslik)",
+        "message": "Sõnum",
+        "send": "SAADA"
+    }
+}

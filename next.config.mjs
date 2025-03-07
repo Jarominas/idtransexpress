@@ -1,4 +1,12 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+import createNextIntlPlugin from 'next-intl/plugin'
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin()
+const nextConfig = {
+    images: {
+        domains: ['localhost', 'cdn.sanity.io'],
+    },
+    reactStrictMode: true,
+}
+
+export default withNextIntl(nextConfig)
