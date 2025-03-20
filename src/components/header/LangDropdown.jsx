@@ -1,12 +1,11 @@
 'use client'
 
-// import { useI18n } from '@/context/I18nContext'
-import { languages } from '@/i18n/config'
-import { usePathname, useRouter } from '@/i18n/request'
 import React from 'react'
+import { useI18n } from '@/context/I18nContext'
+import { languages } from '@/i18n/config'
 
 const LangDropdown = () => {
-    // const { locale, currentLang, changeLocale } = useI18n()
+    const { locale, currentLang, changeLocale } = useI18n()
     const [langMenuOpen, setLangMenuOpen] = React.useState(false)
     const langRef = React.useRef(null)
 
@@ -35,8 +34,8 @@ const LangDropdown = () => {
                 onClick={toggleLangMenu}
                 className='flex items-center text-gray-300 hover:bg-primary-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium focus:outline-none'
             >
-                {/* <img src={currentLang?.src} alt={currentLang?.label} className='h-4 w-6 mr-1' />
-                {currentLang?.label} */}
+                <img src={currentLang?.src} alt={currentLang?.label} className='h-4 w-6 mr-1' />
+                {currentLang?.label}
                 <svg
                     className='ml-1 h-4 w-4'
                     xmlns='http://www.w3.org/2000/svg'
@@ -58,11 +57,11 @@ const LangDropdown = () => {
                 {languages.map((lang) => (
                     <button
                         key={lang.value}
-                        // className={`flex items-center px-4 py-2 text-sm w-full text-left ${
-                        //     locale === lang.value
-                        //         ? 'bg-gray-100 text-gray-900'
-                        //         : 'text-gray-700 hover:bg-gray-100'
-                        // }`}
+                        className={`flex items-center px-4 py-2 text-sm w-full text-left ${
+                            locale === lang.value
+                                ? 'bg-gray-100 text-gray-900'
+                                : 'text-gray-700 hover:bg-gray-100'
+                        }`}
                         onClick={() => {
                             handleChangeLocale(lang.value)
                         }}

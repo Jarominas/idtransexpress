@@ -1,27 +1,29 @@
+'use client'
 import { useTranslations } from 'next-intl'
 
 const navItems = [
     {
-        title: 'nav.about',
+        title: 'about',
         id: 'about',
         href: '#about',
     },
     {
-        title: 'nav.price',
+        title: 'price',
         id: 'prices',
         href: '#prices',
     },
     {
-        title: 'nav.contact',
+        title: 'contact',
         id: 'contact',
         href: '#contact',
     },
 ]
 
-const NavItem = ({ id, href, children }) => {
+const NavItem = ({ id, href, onClick, children }) => {
     return (
         <a
             href={href}
+            onClick={onClick}
             className={`${
                 id === 'about' ? 'text-primary-500' : 'text-gray-300'
             } hover:bg-primary-500 hover:text-white lg:px-3 py-2 rounded-md text-md font-medium`}
@@ -32,6 +34,8 @@ const NavItem = ({ id, href, children }) => {
 }
 
 const NavItems = () => {
+    const t = useTranslations('nav')
+
     const scrollToSection = (sectionId) => (e) => {
         e.preventDefault()
         const element = document.getElementById(sectionId)
@@ -49,7 +53,7 @@ const NavItems = () => {
                         href={item.href}
                         id={item.id}
                     >
-                        {/* {t(item.title)} */}
+                        {t(item.title)}
                     </NavItem>
                 ))}
             </div>

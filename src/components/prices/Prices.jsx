@@ -1,5 +1,4 @@
 import React from 'react'
-import prisma from '@/utils/prisma'
 import { getTranslations, getLocale } from 'next-intl/server'
 import PricingTable from './PricingTable'
 import { tablePricingData } from './tableData'
@@ -9,16 +8,6 @@ const Prices = async () => {
     const t = await getTranslations('prices')
 
     const tables = tablePricingData[locale]
-
-    const prices = await prisma.price.findMany({
-        select: {
-            id: true,
-            amount: true,
-            sizeType: true,
-            vatRate: true,
-            wasteType: true,
-        },
-    })
 
     return (
         <div id='prices' className='py-12 bg-gray-100'>
