@@ -4,6 +4,13 @@ import { tablePricingHeaders } from './tableData'
 const PricingTable = ({ tableData, language }) => {
     const headers = tablePricingHeaders[language]
 
+    const formatPrice = (price) => {
+        if (typeof price === 'number') {
+            return price.toFixed(2).replace('.', ',') + '€'
+        }
+        return price
+    }
+
     if (tableData.customFormat) {
         return (
             <div className='bg-white rounded-xl shadow-lg overflow-hidden mb-12 '>
@@ -35,8 +42,12 @@ const PricingTable = ({ tableData, language }) => {
                                     <td className='py-4 px-6'>
                                         <span className='font-medium'>{row.item}</span>
                                     </td>
-                                    <td className='py-4 px-6 font-medium'>{row.priceNoVAT}</td>
-                                    <td className='py-4 px-6 font-medium'>{row.priceWithVAT}</td>
+                                    <td className='py-4 px-6 font-medium'>
+                                        {formatPrice(row.priceNoVAT)}
+                                    </td>
+                                    <td className='py-4 px-6 font-medium'>
+                                        {formatPrice(row.priceWithVAT)}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -90,8 +101,12 @@ const PricingTable = ({ tableData, language }) => {
                                         <span className='text-slate-500 ml-2'>{row.notes}</span>
                                     )}
                                 </td>
-                                <td className='py-4 px-6 font-medium'>{row.priceNoVAT}</td>
-                                <td className='py-4 px-6 font-medium'>{row.priceWithVAT}</td>
+                                <td className='py-4 px-6 font-medium'>
+                                    {formatPrice(row.priceNoVAT)}
+                                </td>
+                                <td className='py-4 px-6 font-medium'>
+                                    {formatPrice(row.priceWithVAT)}
+                                </td>
                             </tr>
                         ))}
                     </tbody>

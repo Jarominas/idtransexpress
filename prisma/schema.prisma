@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Prices {
+  id                          Int     @id @default(autoincrement())
+  //Maksu määr
+  vat_rate                    Float   @default(0.22)
+
+  //Soorteeritud ehituspraht:pinnas,betoon,asfalt.
+  sortedWaste_size_10         Float   @default(250)
+  sortedWaste_size_12         Float   @default(270)
+  sortedWaste_size_15         Float   @default(300)
+
+  //Tellisid,kivid,keraamika (kuni 10т)
+  bricksCeramic_size_10       Float   @default(350)
+
+  //Segaehituspraht
+  mixedWaste_transport_fee    Float   @default(180)
+
+  //Suurjäätmed
+  bulkyWaste_size_10          Float   @default(320)
+  bulkyWaste_size_12          Float   @default(360)
+  bulkyWaste_size_15          Float   @default(410)
+  bulkyWaste_size_20          Float   @default(510)
+  bulkyWaste_size_30          Float   @default(640)
+
+  //Üldhinnad
+  general_outside_city_km     Float   @default(1.45)
+  general_city_hour           Float   @default(40)
+  general_container_rent_small Float  @default(3.5)
+  general_container_rent_medium Float @default(5)
+  general_container_rent_large Float  @default(6)
+}

@@ -7,7 +7,8 @@ const Prices = async () => {
     const locale = await getLocale()
     const t = await getTranslations('prices')
 
-    const tables = tablePricingData[locale]
+    const pricingData = await tablePricingData()
+    const tables = pricingData[locale]
 
     return (
         <div id='prices' className='py-12 bg-gray-100'>
@@ -19,7 +20,7 @@ const Prices = async () => {
                 </div>
                 <div className='py-16'>
                     <div className='max-w-7xl mx-auto'>
-                        {tables.map((table) => (
+                        {tables?.map((table) => (
                             <div key={table.id}>
                                 <header className='text-center mb-6'>
                                     <h3 className='text-2xl md:text-2xl font-bold text-slate-800 mb-3'>
