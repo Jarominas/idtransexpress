@@ -375,7 +375,6 @@ const Admin = () => {
                     >
                         Back to WebPage
                     </button>
-                    <button onClick={() => signOut()}>Sign Out</button>
                 </div>
             </form>
         </div>

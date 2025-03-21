@@ -25,7 +25,6 @@ export default function Login() {
                 username,
                 password,
             })
-            console.log('result', result)
             if (result?.error) {
                 setError('Invalid username or password')
             } else {
@@ -37,8 +36,8 @@ export default function Login() {
     }
 
     return (
-        <div className='flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 p-4'>
-            <div className='w-full max-w-md overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-xl transition-all duration-300 hover:shadow-2xl'>
+        <div className='flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-0 to-blue-50 dark:from-gray-900 dark:to-gray-800 p-4'>
+            <div className='w-full max-w-md overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-xl transition-all duration-200 hover:shadow-1xl'>
                 <div className='bg-primary-600 p-6 text-center'>
                     <div className='mx-auto mb-4 h-20 w-60 flex items-center justify-center bg-gray-800 rounded-2xl'>
                         <Image src={'/large_logo.png'} alt='logo' width={200} height={40} />
