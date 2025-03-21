@@ -1,7 +1,12 @@
 'use client'
 import React from 'react'
+import { useSession, signOut } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const Admin = () => {
+    const { data: session, status } = useSession()
+    const router = useRouter()
+
     const [prices, setPrices] = React.useState(null)
     const [loading, setLoading] = React.useState(true)
     const [updating, setUpdating] = React.useState(false)
@@ -9,6 +14,10 @@ const Admin = () => {
     const [error, setError] = React.useState('')
 
     React.useEffect(() => {
+        if (status === 'unauthenticated') {
+            router.push('/admin/login')
+            return
+        }
         const fetchPrices = async () => {
             try {
                 const response = await fetch('/api/prices')
@@ -23,7 +32,7 @@ const Admin = () => {
         }
 
         fetchPrices()
-    }, [])
+    }, [status, router])
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -56,25 +65,16 @@ const Admin = () => {
         }
     }
 
+    if (!session) {
+        return null
+    }
+
     if (loading) return <div className='text-center py-10'>Loading prices...</div>
     if (!prices) return <div className='text-center py-10'>No prices found.</div>
 
     return (
         <div className='container mx-auto px-4 py-8'>
             <h1 className='text-2xl font-bold mb-6'>Update Prices</h1>
-
-            {error && (
-                <div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4'>
-                    {error}
-                </div>
-            )}
-
-            {message && (
-                <div className='bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4'>
-                    {message}
-                </div>
-            )}
-
             <form onSubmit={handleSubmit}>
                 <div className='bg-white shadow-md rounded-lg overflow-hidden'>
                     <table className='min-w-full divide-y divide-gray-200'>
@@ -347,16 +347,35 @@ const Admin = () => {
                     </table>
                 </div>
 
-                <div className='mt-6 text-right'>
+                {error && (
+                    <div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 mt-4'>
+                        {error}
+                    </div>
+                )}
+
+                {message && (
+                    <div className='bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4 mt-4'>
+                        {message}
+                    </div>
+                )}
+
+                <div className='mt-6 flex flex-col sm:flex-row gap-3 sm:justify-en'>
                     <button
                         type='submit'
                         disabled={updating}
-                        className={`px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                        className={`px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
                             updating ? 'opacity-50 cursor-not-allowed' : ''
                         }`}
                     >
                         {updating ? 'Updating...' : 'Update Prices'}
                     </button>
+                    <button
+                        className='px-4 py-2 bg-primary-500 text-white rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ml-2'
+                        onClick={() => router.push('/')}
+                    >
+                        Back to WebPage
+                    </button>
+                    <button onClick={() => signOut()}>Sign Out</button>
                 </div>
             </form>
         </div>

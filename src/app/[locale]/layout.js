@@ -1,8 +1,8 @@
 import { Geist, Geist_Mono } from 'next/font/google'
 import '../globals.css'
-import { NextIntlClientProvider, useMessages } from 'next-intl'
 import { getMessages } from '@/i18n/request'
-import { I18nProvider } from '@/context/I18nContext'
+import { Providers } from '@/providers/Providers'
+import { Outfit } from 'next/font/google'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -11,6 +11,10 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
     variable: '--font-geist-mono',
+    subsets: ['latin'],
+})
+const outfit = Outfit({
+    variable: '--font-outfit',
     subsets: ['latin'],
 })
 
@@ -25,12 +29,10 @@ export default async function LocaleLayout({ children, params }) {
     const messages = await getMessages(locale)
     return (
         <html lang={locale}>
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                <NextIntlClientProvider messages={messages} locale={locale}>
-                    <I18nProvider locale={locale} messages={messages}>
-                        {children}
-                    </I18nProvider>
-                </NextIntlClientProvider>
+            <body className={`${geistSans.variable} ${outfit.variable} antialiased`}>
+                <Providers messages={messages} locale={locale}>
+                    {children}
+                </Providers>
             </body>
         </html>
     )
